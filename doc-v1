@@ -1,0 +1,20 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"$id" : "http://kekdocs.com/schemas/doc-v1",
+	"title" : "KekDoc Schema",
+	"type" : "object",
+	"required" : ["id", "properties", "updated_at", "created_at"],
+	"properties" : {
+		"title" : {},
+		"description" : {},
+		"attributes" : {},
+		"$schema" : {},
+		"updated_at" : {},
+		"created_at" : {},
+		"id" : {
+			"type" : "string"
+		},
+		"kek" : {}
+	}
+
+}

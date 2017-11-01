@@ -1,7 +1,7 @@
 {
 	"$schema" : "http://json-schema.org/draft-06/schema#",
 	"$id" : "http://kekdocs.com/schemas/kek-v1",
-	"title": "Base Schema for All Kek Docs",
+	"title": "Kek Format Schema",
 	"type" : "object",
 	"required" : ["id", "version", "revisions"],
 	"properties" : {
@@ -11,7 +11,7 @@
 		},
 		"current" : {
 			"type" : "object",
-			"title" : "KekDoc Current Content",
+			"title" : "Kek Current Content",
 			"description" : "Non-required field to be used as helper to display the most current doc property data without having to use a build function. Generally better to store this information in an outside database."
 		},
 		"title" : {"type" : "string"},
@@ -49,7 +49,7 @@
 					},
 					"index" : {
 						"type" : "number",
-						"description" : "The current index of the block in the chain",
+						"description" : "The current index of the block in the chain"
 					},
 					"timestamp" : {
 						"type" : "number",
