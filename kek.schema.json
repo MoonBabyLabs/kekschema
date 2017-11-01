@@ -1,0 +1,67 @@
+{
+	"$schema" : "http://json-schema.org/draft-06/schema#",
+	"title": "Base Schema for All Kek Docs",
+	"type" : "object",
+	"required" : ["id", "version", "revisions"],
+	"properties" : {
+		"id" : {
+			"type" : "string",
+			"description" : "A 12 byte (20 char) global unique identifier consisting of 4 bytes representing seconds since Unix epoch, 3 byte machine identifier, 2 byte process id, and 3 byte counter starting with a random value. Go Reference sample: https://github.com/rs/xid"
+		},
+		"current" : {
+			"type" : "object",
+			"title" : "KekDoc Current Content",
+			"description" : "Non-required field to be used as helper to display the most current doc property data without having to use a build function. Generally better to store this information in an outside database."
+		},
+		"title" : {"type" : "string"},
+		"description" : {"type" : "string"},
+		"revisions" : {
+			"type" : "array",
+			"items" : {
+				"title" : "Kekrevision Block",
+				"description" : "A single revision block in the kek document chain.",
+				"type" : "object",
+				"required" : ["space", "hash", "index", "data"],
+				"properties" : {
+					"space" : {
+						"type" : "string",
+						"description" : "The unique kekspace string which is making this revision."
+					},
+					"hash" : {
+						"type" : "string",
+						"description" : "A  256 sha hash that consists of the index + space + previous_hash + data + autoincrementing nonce value. MUST start with 2 leading zeroes"
+					},
+					"index" : {
+						"type" : "number",
+						"description" : "The current index of the block in the chain",
+					},
+					"timestamp" : {
+						"type" : "number",
+						"description" : "The unix timestamp when the revision block was added."
+					},
+					"data" : {
+						"title" : "Modified KekDoc properties",
+						"type" : "object",
+						"properties" : {
+							"add" : {
+								"type" : "object",
+								"title" : "Add property values",
+								"description" : "The properties and their associated values to add to the doc."
+							},
+							"modify" : {
+								"type" : "object",
+								"title" : "Modify property values",
+								"description" : "The properties and their associated values to modify in the doc."
+							},
+							"delete" : {
+								"type" : "object",
+								"title" : "Delete property values",
+								"description" : "A key / bool hash map for properties to delete. Ex: '{\"my\": {\"item\" : {\"property\": true}}}' "
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
