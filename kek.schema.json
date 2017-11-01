@@ -1,5 +1,6 @@
 {
 	"$schema" : "http://json-schema.org/draft-06/schema#",
+	"$id" : "http://kekdocs.com/schemas/kek-v1",
 	"title": "Base Schema for All Kek Docs",
 	"type" : "object",
 	"required" : ["id", "version", "revisions"],
@@ -26,6 +27,21 @@
 					"space" : {
 						"type" : "string",
 						"description" : "The unique kekspace string which is making this revision."
+					},
+					"signature" : {
+						"type" : "object",
+						"title" : "Signed verification",
+						"description" : "A 3rd party verification signature that can assure the authenticity of this revision.",
+						"properties" : {
+							"source" : {
+								"type" : "string",
+								"description" : "The uri to the 3rd party source that has written the signature."
+							},
+							"token" : {
+								"type" : "string",
+								"description" : "The unique token string that verifies this block."
+							}
+						}
 					},
 					"hash" : {
 						"type" : "string",
