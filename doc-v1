@@ -3,18 +3,55 @@
 	"$id" : "http://kekdocs.com/schemas/doc-v1",
 	"title" : "KekDoc Schema",
 	"type" : "object",
-	"required" : ["id", "properties", "updated_at", "created_at"],
+	"required" : ["id", "attributes", "updated_at", "created_at"],
 	"properties" : {
-		"title" : {},
-		"description" : {},
-		"attributes" : {},
-		"$schema" : {},
-		"updated_at" : {},
-		"created_at" : {},
+		"name" : {
+			"type" : "string",
+			"title" : "The Document Name",
+			"Description" : "The name for the KekDoc"
+		},
+		"kek_version" : {
+			"type" : "string",
+			"format" : "uri",
+			"title" : "The KekVersion",
+			"Description" : "The Kek Version used to create this Kek Content."
+		},
+		"description" : {"type" : "string", "title" : "KekDoc Description"},
+		"attributes" : {
+			"type" : "object",
+			"title" : "KekDoc Content Attributes",
+			"description" : "The content attributes to associate for this KekDoc"
+		},
+		"$schema" : {
+			"type" : "string",
+			"title" : "KekDoc Primary Schema",
+			"description" : "Optional schema field that readers of the doc can use as a reference for this doc."
+		},
+		"updated_at" : {
+			"type" : "string",
+			"format" : "date-time",
+			"title" : "Updated At Date"
+		},
+		"created_at" : {
+			"type" : "string",
+			"format" : "date-time",
+			"title" : "Created At Date"
+		},
 		"id" : {
 			"type" : "string"
 		},
-		"kek" : {}
+		"Revisions" : {
+			"$reference" : "http://kekdocs.com/schemas/kek-v1"
+		},
+		"root_id" : {"type" : "string", "title" : "Doc's Root Id", "description" : "The root id from where this document was created. May be empty if its an original. Only applies to copies"},
+		"copy_ids" : {
+			"type" : "object", 
+			"title" : "KekDoc Copy Ids",
+			"description" : "The direct copies that originated from this KekDoc",
+			"additionalProperties" : {
+				"type" : "boolean",
+				"description" : "The id of the copied doc to store as a relation to this doc."
+			}
+		}
 	}
-
 }
