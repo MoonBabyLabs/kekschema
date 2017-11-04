@@ -3,7 +3,7 @@
 	"$id": "http://kekdocs.com/schemas/kek-v1",
 	"title": "Kek Format Schema",
 	"type": "object",
-	"required": ["id", "version", "revisions"],
+	"required": ["id", "revisions"],
 	"properties": {
 		"id": {
 			"type": "string",
@@ -30,15 +30,18 @@
 				"properties": {
 					"space": {
 						"type": "string",
-						"description": "The unique kekspace string which is making this revision."
+						"description": "The unique kekspace id string which is making this revision."
 					},
 					"signature": {
 						"type": "object",
 						"title": "Signed verification",
 						"description": "A 3rd party verification signature that can assure the authenticity of this revision.",
+						"additionalProperties": false,
 						"properties": {
 							"source": {
 								"type": "string",
+								"format": "uri",
+								"pattern": "^(https?|wss?|ftp)://",
 								"description": "The uri to the 3rd party source that has written the signature."
 							},
 							"token": {
@@ -62,23 +65,35 @@
 					"data": {
 						"title": "Modified KekDoc properties",
 						"type": "object",
+						"additionalProperties": false,
 						"properties": {
 							"add": {
 								"type": "array",
 								"title": "Add property values",
-								"description": "The properties and their associated values to add to the doc. Should be in dot notation. The following example will add a value to the family bills. Ex: [family.bills.car = $350]"
+								"description": "The properties and their associated values to add to the doc. Should be in dot notation. The following example will add a value to the family bills. Ex: [\"attributes.bills.car\" : \"$350\"]",
+								"items": {
+									"title": "Added Individual Property",
+									"description": "A dictionary hash table that represents the added property and value in dot notation",
+									"type": "object"
+								}
 							},
 							"modify": {
 								"type": "array",
 								"title": "Modify property values",
-								"description": "The properties and their associated values to modify in the doc. Should be in dot notation. The following example will modify  the car family bill. Ex: [family.bills.car = $250]"
+								"description": "The properties and their associated values to modify in the doc. Should be in dot notation. The following example will modify  the car family bill. Ex: [{\"attributes.bills.car\" : \"$250\"}]",
+								"items": {
+									"title": "Modified Individual Property",
+									"description": "A dictionary hash table that represents the added property and value in dot notation",
+									"type": "object"
+								}
 							},
 							"delete": {
 								"type": "array",
 								"title": "Delete property values",
-								"description": "A key / bool hash map for properties to delete. Must be in dot notation to the key to remove. The following example says to remove the car property from the family bills. Ex: [family.bills.car = true]",
-								"additionalProperties": {
-									"type": "bool"
+								"description": "A key / bool hash map for properties to delete. Must be in dot notation to the key to remove. The following example says to remove the car property from the family bills. Ex: [{\"attributes.bills.car \": true}]",
+								"items": {
+									"title": "Individual Delete Property",
+									"description": "A unique individual dot notated property to delete"
 								}
 							}
 						}
