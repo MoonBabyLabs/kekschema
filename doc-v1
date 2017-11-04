@@ -10,22 +10,22 @@
 			"title" : "The Document Name",
 			"Description" : "The name for the KekDoc"
 		},
-		"kek_version" : {
-			"type" : "string",
-			"format" : "uri",
-			"title" : "The KekVersion",
-			"Description" : "The Kek Version used to create this Kek Content."
-		},
 		"description" : {"type" : "string", "title" : "KekDoc Description"},
 		"attributes" : {
 			"type" : "object",
 			"title" : "KekDoc Content Attributes",
-			"description" : "The content attributes to associate for this KekDoc"
+			"description" : "The content attributes to associate for this KekDoc. These are the properties that could be read by other json schemas."
 		},
-		"$schema" : {
-			"type" : "string",
-			"title" : "KekDoc Primary Schema",
-			"description" : "Optional schema field that readers of the doc can use as a reference for this doc."
+		"schemas" : {
+			"type" : "array",
+			"title" : "KekDoc Json Schemas",
+			"description" : "You can list the URL's to the schemas that can be used to interpret this doc. A single doc can have 0, 1 or multiple schemas.",
+			"items" : {
+				"title" : "Individual Json Schema",
+				"type" : "string",
+				"format" : "uri",
+				"pattern": "^(https?|wss?|ftp)://",
+			}
 		},
 		"updated_at" : {
 			"type" : "string",
@@ -40,7 +40,7 @@
 		"id" : {
 			"type" : "string"
 		},
-		"Revisions" : {
+		"kek" : {
 			"$reference" : "http://kekdocs.com/schemas/kek-v1"
 		},
 		"root_id" : {"type" : "string", "title" : "Doc's Root Id", "description" : "The root id from where this document was created. May be empty if its an original. Only applies to copies"},
