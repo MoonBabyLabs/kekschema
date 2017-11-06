@@ -9,7 +9,7 @@
 			"type": "string",
 			"description": "A 12 byte (20 char) global unique identifier consisting of 4 bytes representing seconds since Unix epoch, 3 byte machine identifier, 2 byte process id, and 3 byte counter starting with a random value. Go Reference sample: https://github.com/rs/xid"
 		},
-		"current": {
+		"current_state": {
 			"type": "object",
 			"title": "Kek Current Content",
 			"description": "Non-required field to be used as helper to display the most current doc property data without having to use a build function. Generally better to store this information in an outside database."
@@ -26,11 +26,21 @@
 				"title": "Kekrevision Block",
 				"description": "A single revision block in the kek document chain.",
 				"type": "object",
-				"required": ["space", "hash", "index", "data"],
-				"properties": {
-					"space": {
-						"type": "string",
-						"description": "The unique kekspace id string which is making this revision."
+				"required": ["user", "hash", "index", "data"],
+				"user": {
+					"user": {
+						"type": "object",
+						"description": "A unique identifier to whom modified this data.",
+						"required" :  ["record", "source"],
+						"properties" : {
+							"id" : {
+								"type" : "string"
+							},
+							"source" : {
+								"type" : "string",
+								"description" : "The source of how this modifier record was obtained. "
+							}
+						}
 					},
 					"signature": {
 						"type": "object",
@@ -50,9 +60,16 @@
 							}
 						}
 					},
+					"comment" : {
+						"type" : "string",
+						"description" : "A note to describe what changed and why it was changed.",
+						"maxLength" : 256
+					},
 					"hash": {
 						"type": "string",
-						"description": "A  256 sha hash that consists of the index + space + previous_hash + data + autoincrementing nonce value. MUST start with 2 leading zeroes"
+						"description": "A  256 sha hash that consists of the index + previous_hash + data + autoincrementing nonce value. MUST start with 2 leading zeroes",
+						"minLength" : 256,
+						"maxLength" : 256,
 					},
 					"index": {
 						"type": "number",
@@ -65,35 +82,20 @@
 					"data": {
 						"title": "Modified KekDoc properties",
 						"type": "object",
-						"additionalProperties": false,
-						"properties": {
-							"add": {
-								"type": "array",
-								"title": "Add property values",
-								"description": "The properties and their associated values to add to the doc. Should be in dot notation. The following example will add a value to the family bills. Ex: [\"attributes.bills.car\" : \"$350\"]",
-								"items": {
-									"title": "Added Individual Property",
-									"description": "A dictionary hash table that represents the added property and value in dot notation",
-									"type": "object"
-								}
-							},
-							"modify": {
-								"type": "array",
-								"title": "Modify property values",
-								"description": "The properties and their associated values to modify in the doc. Should be in dot notation. The following example will modify  the car family bill. Ex: [{\"attributes.bills.car\" : \"$250\"}]",
-								"items": {
-									"title": "Modified Individual Property",
-									"description": "A dictionary hash table that represents the added property and value in dot notation",
-									"type": "object"
-								}
-							},
-							"delete": {
-								"type": "array",
-								"title": "Delete property values",
-								"description": "A key / bool hash map for properties to delete. Must be in dot notation to the key to remove. The following example says to remove the car property from the family bills. Ex: [{\"attributes.bills.car \": true}]",
-								"items": {
-									"title": "Individual Delete Property",
-									"description": "A unique individual dot notated property to delete"
+						"description" : "Data should be an object that includes only modified data. Removed data should equal null.",
+						"additionalProperties" : {
+							"type" : "object",
+							"description" : "the old and new state of the modified content",
+							"properties" : {
+								"old" : {
+									"type" : "object",
+									"description" : "The old state object of items that have changed",
+									"title" : "Old State"
+								},
+								"new" : {
+									"type" : "object",
+									"description" : "the new state of modified data on the piece of content.",
+									"title" : "New State"
 								}
 							}
 						}
