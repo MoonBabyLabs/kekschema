@@ -12,7 +12,8 @@
 		"current_state": {
 			"type": "object",
 			"title": "Kek Current Content",
-			"description": "The current state of the content item."
+			"description": "The current state of the content item.",
+			"enum" : [{"$ref" : "http://kekdocs.com/doc-v1"}, {"$ref" : "http://kekdocs.com/collection-v1"}, {"$ref" : "http://kekdocs.com/channel-v1"}]
 		},
 		"title": {
 			"type": "string"
