@@ -21,8 +21,10 @@
 		"description": {
 			"type": "string"
 		},
+		"additionalProperties" : false,
 		"revisions": {
 			"type": "array",
+			"description" : "A blockchain instance of every revision that this kek content piece has had saving the new data, the user who edited, the location where it was saved and the unix timestamp when it was updated. You can also include a 3rd party signature string along with comments as well."
 			"items": {
 				"title": "Revision Block",
 				"description": "A single revision block in the kek document chain.",

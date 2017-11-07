@@ -17,6 +17,19 @@ The id is a 12 byte (20 char) global unique identifier consisting of 4 bytes rep
 #### revisions
 A blockchain instance of every revision that this kek content piece has had saving the new data, the user who edited, the location where it was saved and the unix timestamp when it was updated. You can also include a 3rd party signature string along with comments as well.
 
+[See Revision Block Properties for revisions details](#revision-block-properties)
+
+### Optional properties
+
+#### title
+
+
+#### description
+
+#### current_state
+
+## Revision Block Properties
+
 
 
 ## License
