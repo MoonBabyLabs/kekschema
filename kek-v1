@@ -30,7 +30,7 @@
 					"author": {
 						"type": "object",
 						"description": "A unique identifier of whom modified this data.",
-						"required" :  ["record", "source"],
+						"required" :  ["id", "source"],
 						"additionalProperties" : false,
 						"properties" : {
 							"id" : {
@@ -39,6 +39,11 @@
 							"source" : {
 								"type" : "string",
 								"description" : "The source of how this modifier record was obtained. "
+							},
+							"comment" : {
+								"type" : "string",
+								"description" : "a short note describing the association between the author source and id",
+								"maxLength" : 256
 							}
 						}
 					},

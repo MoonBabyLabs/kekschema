@@ -1,12 +1,12 @@
 # kek JSON Schema
 
-Reliably share, collaborate, manage and access your structured content in any environment or application workflow. Kek removes the headache from managing content through a distributed network of machines. The kek schema contains a blockchain revision history and consistent structure applicable to most structured content pieces. Following the schema and open format will provide developers and content creators the ability to reliably manage content across multiple locations simultaneously because every revision can say who wrote a given update at a certain location and specified time.
+Reliably share, collaborate, manage and access your structured content in any environment or application workflow. Kek removes the headache from managing content through a distributed network of machines. The kek schema contains a blockchain revision history and consistent structure that will apply to any content piece. Following the schema and open format will provide developers and content creators the ability to reliably manage content across multiple locations simultaneously because every revision block will know who wrote a given update at a certain location and specified time.
 
 ## Getting Started
 
 ### Development Packages & Application Plugins
 
-You will want to reference the kek open format and use an development package to create your kek files. They could be created by hand but you will more than likely be creating your kek files through a content management system or document editor like word or some other tool. You can go to http://kekdocs.com/developer/packages to see a list of available packages that are available for applications and languages. You are encouraged to create a package if you don't see it for your desired application or language. It is straightforward to create in any language that can speak directly to the underlying machine as you will need to get the mac address and the current process id.
+You will want to reference the kek open format and use an development package to create your kek files. They could be created by hand but you will more than likely be creating your kek files through a content management system or document editor like word or some other tool. You can go to http://kekdocs.com/developer/packages (coming soon) to see a list of available packages that are available for applications and languages. You are encouraged to create a package if you don't see it for your desired application or language. It is straightforward to create in any language that can speak directly to the underlying machine as you will need to get the mac address and the current process id.
 
 ## kek Properties
 
@@ -34,7 +34,13 @@ A blockchain instance of every revision that this kek content piece has had savi
 (string) The hash is a 256 sha hash that consists of the index + the previous block's hash + the data property + an autoincrementing nonce value. The hash property is the most resource heavy item in the schema.
 
 #### author
-(object)
+(object) The creator of the new block data. The object contains 2 strings: the author value and the source that provided the author value. There is also an additional optional comments property that may provide more details about the author property. Avoid putting any contact or personal info into the author object. Put the identifier behind an access wall. The author will thank you.
+##### Author required properties
+* *id* (string) A unique identifier associated to the author.
+* *source* (string) The location where you can find this author association.
+
+##### Author optional properties
+* *comment* (string) optional field to add additional info about the author association.
 
 #### mac_address
 (string) The mac address where the content block is being written whether a server, pc, phone, tablet, etc.
