@@ -1,0 +1,75 @@
+{
+	"$schema" : "http://kekdocs.com/schema/doc-v1",
+	"id" : "132a8e229Ceas3282IeF",
+	"title" : "My Awesome Cake Recipe",
+	"description" : "The recipe to my awesome cake recipe",
+	"revisions" : [
+		{
+			"author" : {
+				"id" : "exampleHandle",
+				"source" : "http://www.twitter.com"
+			},
+			"mac_address" : "6d:z4:c5:x1:e2:f3",
+			"hash" : "00Aeef88392EfffFe8a939928dfEEa9929028afFFe89a30aIiw0w830A82Fef",
+			"index" : 2,
+			"timestamp" : 1510085028,
+			"data" : {
+				"old"  : {
+					"attributes" : {
+					"bake_time" : "30 minutes"	
+					}
+				},
+				"new" : {
+					"attributes" : {
+						"bake_time" : "45 minutes",
+						"temperature" : "325 degrees"
+					}
+				}
+			}
+		},
+		{
+			"author" : {
+				"id" : "292Ae8FefQaaawqe",
+				"source" : "http://example.com"
+			},
+			"mac_address" : "3d:b4:c5:z1:z2:z3",
+			"hash" : "00Aeef88392EfffFe8a9399feCfEEa99290284fFFe89aE0aIiw0w830282999",
+			"index" : 1,
+			"timestamp" : 1510085020,
+			"data" : {
+				"old"  : {
+					"attributes" : {
+						"ingredients" : ["eggs", "milk"]
+					}
+				},
+				"new" : {
+					"attributes" : {
+						"ingredients" : ["eggs", "milk", "pineapple", "brown sugar", "flour"],
+						"steps" : {
+							"step_1" : "make it good."
+						}
+					}
+				}
+			}
+		},
+		{
+			"author" : {
+				"id" : "292Ae8FefQaaawqe",
+				"source" : "http://example.com"
+			},
+			"mac_address" : "3d:b4:c5:d1:e2:f3",
+			"hash" : "00Aeef88392EfffFe8a939928dfEEa99290284fFFe89aE0aIiw0w830282Fea",
+			"index" : 0,
+			"timestamp" : 1510085014,
+			"data" : {
+				"old"  : {},
+				"new" : {
+					"attributes" : {
+						"ingredients" : ["eggs", "milk"],
+						"bake_time" : "30 minutes" 
+					}
+				}
+			}
+		}
+	]
+}
