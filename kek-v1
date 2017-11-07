@@ -7,13 +7,9 @@
 	"properties": {
 		"id": {
 			"type": "string",
-			"description": "A 12 byte (20 char) global unique identifier consisting of 4 bytes representing seconds since Unix epoch, 3 byte machine identifier, 2 byte process id, and 3 byte counter starting with a random value. Go Reference sample: https://github.com/rs/xid"
-		},
-		"current_state": {
-			"type": "object",
-			"title": "Kek Current Content",
-			"description": "The current state of the content item.",
-			"enum" : [{"$ref" : "http://kekdocs.com/doc-v1"}, {"$ref" : "http://kekdocs.com/collection-v1"}, {"$ref" : "http://kekdocs.com/channel-v1"}]
+			"description": "A 12 byte (20 char) global unique identifier consisting of 4 bytes representing seconds since Unix epoch, 3 byte machine identifier, 2 byte process id, and 3 byte counter starting with a random value. Go Reference sample: https://github.com/rs/xid",
+			"minLength" : 20,
+			"maxLength" : 20
 		},
 		"title": {
 			"type": "string"
@@ -29,7 +25,7 @@
 				"title": "Revision Block",
 				"description": "A single revision block in the kek document chain.",
 				"type": "object",
-				"required": ["author", "location", "hash", "index", "data"],
+				"required": ["author", "mac_address", "hash", "index", "data", "timestamp"],
 				"properties": {
 					"author": {
 						"type": "object",
