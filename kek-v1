@@ -12,7 +12,7 @@
 		"current_state": {
 			"type": "object",
 			"title": "Kek Current Content",
-			"description": "Non-required field to be used as helper to display the most current doc property data without having to use a build function. Generally better to store this information in an outside database."
+			"description": "The current state of the content item."
 		},
 		"title": {
 			"type": "string"
@@ -23,15 +23,16 @@
 		"revisions": {
 			"type": "array",
 			"items": {
-				"title": "Kekrevision Block",
+				"title": "Revision Block",
 				"description": "A single revision block in the kek document chain.",
 				"type": "object",
-				"required": ["user", "hash", "index", "data"],
-				"user": {
-					"user": {
+				"required": ["author", "location", "hash", "index", "data"],
+				"properties": {
+					"author": {
 						"type": "object",
-						"description": "A unique identifier to whom modified this data.",
+						"description": "A unique identifier of whom modified this data.",
 						"required" :  ["record", "source"],
+						"additionalProperties" : false,
 						"properties" : {
 							"id" : {
 								"type" : "string"
@@ -41,6 +42,11 @@
 								"description" : "The source of how this modifier record was obtained. "
 							}
 						}
+					},
+					"mac_address" : {
+						"type" : "string",
+						"additionalProperties" : false,
+						"description" : "The mac address from the machine that's adding this block."
 					},
 					"signature": {
 						"type": "object",
@@ -67,9 +73,9 @@
 					},
 					"hash": {
 						"type": "string",
-						"description": "A  256 sha hash that consists of the index + previous_hash + data + autoincrementing nonce value. MUST start with 2 leading zeroes",
-						"minLength" : 256,
-						"maxLength" : 256,
+						"description": "A 256 sha hash that consists of the index + previous_hash + data + autoincrementing nonce value. MUST start with 2 leading zeroes",
+						"minLength" : 64,
+						"maxLength" : 64
 					},
 					"index": {
 						"type": "number",

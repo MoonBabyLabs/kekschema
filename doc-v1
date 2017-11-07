@@ -40,7 +40,7 @@
 		"id" : {
 			"type" : "string"
 		},
-		"kek" : {
+		"revisions" : {
 			"$reference" : "http://kekdocs.com/schemas/kek-v1"
 		},
 		"root_id" : {"type" : "string", "title" : "Doc's Root Id", "description" : "The root id from where this document was created. May be empty if its an original. Only applies to copies"},
