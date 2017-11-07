@@ -1,0 +1,3 @@
+# kek JSON Schema
+
+Reliably share, collaborate, manage and access your structured content in any environment or application workflow. Kek removes the headache from managing content through a distributed network of machines. The kek schema contains a blockchain revision history and consistent structure applicable to most structured content pieces. Following the schema and open format will provide developers and content creators the ability to reliably manage content across multiple locations simultaneously because every revision can say who wrote a given update at a certain location and specified time.
