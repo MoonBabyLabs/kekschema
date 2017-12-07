@@ -52,6 +52,12 @@
 								"maxLength" : 20,
 								"minLength" : 7
 							},
+							"email" : {
+								"type" : "string",
+								"description" : "A contact email address for the author.",
+								"minLength" : 4,
+								"maxLength" : 100
+							},
 							"location" : {
 								"type" : "object",
 								"description" : "A contact location for this author",

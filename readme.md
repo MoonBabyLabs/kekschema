@@ -41,6 +41,9 @@ A blockchain instance of every revision that this kek content piece has had savi
 
 ##### Author optional properties
 * *comment* (string) optional field to add additional info about the author association.
+* *phone* (string) optional field for a contact phone number.
+* *email* (string) optional field for the author's contact email address.
+* *location* (object) An object that may contain address, city, region_code, postal_code, and country_code properties.
 
 #### mac_address
 (string) The mac address where the content block is being written whether a server, pc, phone, tablet, etc.
