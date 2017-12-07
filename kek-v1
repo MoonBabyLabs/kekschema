@@ -20,16 +20,16 @@
 		"additionalProperties" : false,
 		"revisions": {
 			"type": "array",
-			"description" : "A blockchain instance of every revision that this kek content piece has had saving the new data, the user who edited, the location where it was saved and the unix timestamp when it was updated. You can also include a 3rd party signature string along with comments as well.",
+			"description" : "A blockchain instance of each revision block from this kek.",
 			"items": {
 				"title": "Revision Block",
-				"description": "A single revision block in the kek document chain.",
+				"description": "A single revision block in the kek document chain. The block will contain the author object, mac address, hash, timestamp, changed data and index.",
 				"type": "object",
 				"required": ["author", "mac_address", "hash", "index", "data", "timestamp"],
 				"properties": {
 					"author": {
 						"type": "object",
-						"description": "A unique identifier of whom modified this data.",
+						"description": "A unique identifier of who modified this data.",
 						"required" :  ["id", "source"],
 						"additionalProperties" : false,
 						"properties" : {
@@ -44,6 +44,48 @@
 								"type" : "string",
 								"description" : "a short note describing the association between the author source and id",
 								"maxLength" : 256
+							},
+							"phone" : {
+								"type" : "string",
+								"description" : "A contact phone number for the author.",
+								"email" : "A contact email address for the author.",
+								"maxLength" : 20,
+								"minLength" : 7
+							},
+							"location" : {
+								"type" : "object",
+								"description" : "A contact location for this author",
+								"properties" : {
+									"address" : {
+										"type" : "string",
+										"description" : "The street address for this author",
+										"maxLength" : 128
+									},
+									"city" : {
+										"type" : "string",
+										"description" : "The city for this author.",
+										"maxLength" : 25,
+										"minLength" : 4
+									},
+									"region_code" : {
+										"type" : "string",
+										"description" : "The regional code or abbreviation for this author.",
+										"maxLength" : 10,
+										"minLength" : 2
+									},
+									"postal_code" : {
+										"type" : "string",
+										"description" : "The postal code for this author location. Needs to be string even though some countries use integers for their postal codes.",
+										"maxLength" : 10,
+										"minLength" : 3
+									},
+									"country_code" : {
+										"type" : "string",
+										"description" : "The 2-3 character country code for this author location.",
+										"minLength" : 2,
+										"maxLength" : 3
+									}
+								}
 							}
 						}
 					},
@@ -93,20 +135,16 @@
 						"title": "Modified KekDoc properties",
 						"type": "object",
 						"description" : "Data should be an object that includes only modified data. Removed data should equal null.",
-						"additionalProperties" : {
-							"type" : "object",
-							"description" : "the old and new state of the modified content",
-							"properties" : {
-								"old" : {
-									"type" : "object",
-									"description" : "The old state object of items that have changed",
-									"title" : "Old State"
-								},
-								"new" : {
-									"type" : "object",
-									"description" : "the new state of modified data on the piece of content.",
-									"title" : "New State"
-								}
+						"properties" : {
+							"old" : {
+								"type" : "object",
+								"description" : "The old state object of items that have changed",
+								"title" : "Old State"
+							},
+							"new" : {
+								"type" : "object",
+								"description" : "the new state of modified data on the piece of content.",
+								"title" : "New State"
 							}
 						}
 					}
