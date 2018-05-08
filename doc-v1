@@ -3,7 +3,7 @@
 	"$id" : "http://kekdocs.com/schemas/doc-v1",
 	"title" : "KekDoc Schema",
 	"type" : "object",
-	"required" : ["id", "attributes", "updated_at", "created_at"],
+	"required" : ["id", "attributes", "updated_at", "created_at", "revision_hash"],
 	"properties" : {
 		"name" : {
 			"type" : "string",
@@ -38,20 +38,15 @@
 			"title" : "Created At Date"
 		},
 		"id" : {
-			"type" : "string"
+			"type" : "string",
+			"description": "A 12 byte (20 char) global unique identifier consisting of 4 bytes representing seconds since Unix epoch, 3 byte machine identifier, 2 byte process id, and 3 byte counter starting with a random value. Go Reference sample: https://github.com/rs/xid",
+			"minLength" : 20,
+			"maxLength" : 20
 		},
-		"revisions" : {
-			"$reference" : "http://kekdocs.com/schemas/kek-v1"
-		},
-		"root_id" : {"type" : "string", "title" : "Doc's Root Id", "description" : "The root id from where this document was created. May be empty if its an original. Only applies to copies"},
-		"copy_ids" : {
-			"type" : "object", 
-			"title" : "KekDoc Copy Ids",
-			"description" : "The direct copies that originated from this KekDoc",
-			"additionalProperties" : {
-				"type" : "boolean",
-				"description" : "The id of the copied doc to store as a relation to this doc."
-			}
+		"revision_ref" : {
+			"type" : "string",
+			"title" : "Revision hash",
+			"description" : "The revision block hash that this doc matches."
 		}
 	}
 }

@@ -18,6 +18,17 @@
 			"type": "string"
 		},
 		"additionalProperties" : false,
+		"schemas" : {
+			"type" : "array",
+			"title" : "KekDoc Json Schemas",
+			"description" : "You can list the URL's to the schemas that can be used to interpret this doc. A single doc can have 0, 1 or multiple schemas.",
+			"items" : {
+				"title" : "Individual Json Schema",
+				"type" : "string",
+				"format" : "uri",
+				"pattern": "^(https?|wss?|ftp)://",
+			}
+		},
 		"revisions": {
 			"type": "array",
 			"description" : "A blockchain instance of each revision block from this kek.",
@@ -25,7 +36,7 @@
 				"title": "Revision Block",
 				"description": "A single revision block in the kek document chain. The block will contain the author object, mac address, hash, timestamp, changed data and index.",
 				"type": "object",
-				"required": ["author", "mac_address", "hash", "index", "data", "timestamp"],
+				"required": ["author", "mac_address", "hash", "index", "attributes", "timestamp"],
 				"properties": {
 					"author": {
 						"type": "object",
@@ -33,16 +44,13 @@
 						"required" :  ["id", "source"],
 						"additionalProperties" : false,
 						"properties" : {
-							"id" : {
-								"type" : "string"
-							},
-							"source" : {
+							"url" : {
 								"type" : "string",
-								"description" : "The source of how this modifier record was obtained. "
+								"description" : "A contact or profile url."
 							},
 							"comment" : {
 								"type" : "string",
-								"description" : "a short note describing the association between the author source and id",
+								"description" : "Short description about this contact.",
 								"maxLength" : 256
 							},
 							"phone" : {
@@ -137,25 +145,14 @@
 						"type": "number",
 						"description": "The unix timestamp when the revision block was added."
 					},
-					"data": {
-						"title": "Modified KekDoc properties",
-						"type": "object",
-						"description" : "Data should be an object that includes only modified data. Removed data should equal null.",
-						"properties" : {
-							"old" : {
-								"type" : "object",
-								"description" : "The old state object of items that have changed",
-								"title" : "Old State"
-							},
-							"new" : {
-								"type" : "object",
-								"description" : "the new state of modified data on the piece of content.",
-								"title" : "New State"
-							}
-						}
+					"attributes": {
+					    "type" : "object",
+					    "title" : "Kekdoc Attributes",
+					    "description" : "The key / value attributes for this kekdoc."
 					}
 				}
 			}
-		}
+		},
+		"root" : {"type" : "string", "title" : "Doc's Root Id", "description" : "The root id from where this document was created. Will be empty if its an original."}
 	}
 }
